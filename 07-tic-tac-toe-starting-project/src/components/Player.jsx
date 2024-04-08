@@ -1,11 +1,14 @@
 import { useState } from 'react';
 
-export default function Player({ initialName, symbol, isActive }) {
+export default function Player({ initialName, symbol, isActive, onChangeName }) {
     const [playerName, setPlayerName] = useState(initialName);
     const [isEditing, setIsEditing] = useState(false); // false는 현재 수정 중이 아니라는 의미
 
     function handleEditClick() {
         setIsEditing((editing) => !editing); // editing : false -> true
+        if (isEditing) {
+            onChangeName(symbol, playerName);
+        }
     }
 
     function handleChange(event) {
